@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Buoi1
+namespace LTWeb01_Bai01
 {
     public class MvcApplication : System.Web.HttpApplication
     {

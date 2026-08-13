@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Buoi1
+namespace LTWeb01_Bai01
 {
     public class RouteConfig
     {
