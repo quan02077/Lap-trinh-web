@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Điện hoa toàn cầu 24h</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="row p-3 w-100" style="background-color:#d4d3d3">
+        <div class="col-4">
+            <img src="~/hinhAnh/logo.png" alt="Logo" style="height: 60px;" />
+        </div>
+        <div class="col-4">
+            <p>
+                <b>Tp.Hồ Chí Minh:</b><br />
+                Điện thoại: 0908509406<br />
+                Email:quan02077@gmail.com
+            </p>
+        </div>
+        <div class="col-4">
+            <p>
+                <b>Tp.Hồ Chí Minh:</b><br />
+                Điện thoại: 0908509406<br />
+                Email:quan02077@gmail.com
+            </p>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm" style="background-color:#70ae1a">
+        <div class="container">
+            <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand">
+                <img src="~/hinhAnh/home.png" alt="Logo" style="height: 40px;" />
+            </a>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Đăng ký", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Đăng nhập", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+            <input type="text" placeholder="Search" class="form-control" />
+            <button type="button" class="btn btn-outline-dark ms-3">Tìm kiếm</button>
+        </div>
+    </nav>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 250px;">
+                    <div class="card-header text-white font-weight-bold text-uppercase" style="background-color: #8bc34a;">
+                        HOA THEO CHỦ ĐỀ
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action text-primary">HOA SINH NHẬT</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">HOA KHAI TRƯƠNG</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">LAN HỒ ĐIỆP</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">HOA CƯỚI</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">HOA CHIA BUỒN</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">QUÀ TẶNG</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">TRÁI CÂY</a>
+                    </div>
+                    <div class="card-header text-white font-weight-bold text-uppercase mt-2" style="background-color: #8bc34a;">
+                        CHỌN THEO GIÁ
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action text-primary">250,000đ trở xuống</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">250,000đ - 400,000đ</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">400,000đ - 600,000đ</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">600,000đ - 900,000đ</a>
+                        <a href="#" class="list-group-item list-group-item-action text-primary">Trên 1,000,000đ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="background-color:#70ae1a">
+        <p class="text-light text-center">
+            Liên hệ: Khoa Công nghệ thông tin - Trường Đại học Công Thương Tp.HCM<br />
+            Địa chỉ: 140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, Tp.HCM<br />
+        </p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
