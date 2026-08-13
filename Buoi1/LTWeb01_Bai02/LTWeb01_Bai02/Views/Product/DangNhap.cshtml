@@ -3,5 +3,26 @@
     ViewBag.Title = "DangNhap";
 }
 
-<h2>DangNhap</h2>
+<main>
+    <div class="container p-4 rounded" style="background-color: #f8f9fa;">
+        <h2 class="text-center mb-4 fw-bold">Đăng nhập</h2>
+        <form style="width: 900px;">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Username</label>
+                <input type="text" class="form-control border-danger" placeholder="Enter your username" />
+                <p class="text-danger">Must to enter your username</p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Password</label>
+                <input type="password" class="form-control border-success" placeholder="Enter your password" />
+                <p class="text-muted">Password include special character!</p>
+            </div>
+            <input type="checkbox" />
+            <label class="form-label fw-bold">Remember password</label>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary mt-3 justify-content-center">Đăng nhập</button>
+            </div>
+        </form>
+    </div>
+</main>
 

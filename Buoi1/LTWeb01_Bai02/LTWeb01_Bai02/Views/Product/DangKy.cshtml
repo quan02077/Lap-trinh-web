@@ -4,6 +4,42 @@
 }
 
 <main>
-
+    <div class="container p-4 rounded" style="background-color: #f8f9fa;">
+        <h2 class="text-center mb-4 fw-bold">Đăng ký tài khoản</h2>
+        <form style="width: 900px;">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Tên khách hàng</label>
+                <input type="text" class="form-control" placeholder="Enter your name" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Địa chỉ email</label>
+                <input type="email" class="form-control" placeholder="Enter your email address" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Mật khẩu</label>
+                <input type="password" class="form-control" placeholder="Enter your password" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Giới tính</label>
+                <div class="ms-5">
+                    <input type="radio" class="form-check-input" name="gender" value="male"> Nam
+                    <input type="radio" class="form-check-input ms-3" name="gender" value="female"> Nữ
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Nghề nghiệp</label>
+                <select class="form-select">
+                    <option value="">Chọn nghề nghiệp</option>
+                    <option value="student">Sinh viên</option>
+                    <option value="teacher">Giáo viên</option>
+                    <option value="engineer">Kỹ sư</option>
+                    <option value="other">Khác</option>
+                </select>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary mt-3 justify-content-center">Đăng ký</button>
+            </div>
+        </form>
+    </div>
 </main>
 
