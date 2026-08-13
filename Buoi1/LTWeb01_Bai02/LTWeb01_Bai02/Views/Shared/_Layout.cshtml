@@ -36,15 +36,32 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li>@Html.ActionLink("Trang chủ", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Đăng ký", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Đăng nhập", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item">
+                            @Html.ActionLink(
+                                "Đăng ký",
+                                "DangKy",
+                                "Product",
+                                new { area = "" },
+                                new { @class = "nav-link" }
+                            )
+                        </li>
+
+                        <li class="nav-item">
+                            @Html.ActionLink(
+                                "Đăng nhập",
+                                "DangNhap",
+                                "Product",
+                                new { area = "" },
+                                new { @class = "nav-link" }
+                            )
+                        </li>
                     </ul>
                 </div>
                 <input type="text" placeholder="Search" class="form-control" />
                 <button type="button" class="btn btn-outline-dark ms-3">Tìm kiếm</button>
             </div>
         </nav>
-            <div class="row flex-grow-1">
+            <div class="row flex-grow-1 p-2">
                 <div class="col-md-9">
                     @RenderBody()
                 </div>
