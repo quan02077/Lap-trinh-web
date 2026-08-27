@@ -1,0 +1,14 @@
+﻿@using LapTrinhWeb_2001240388.Models.Buoi2
+@{
+	ViewBag.Title = "Chi tiết sản phẩm";
+}
+@model SanPham;
+
+<div>
+	<h2>Chi tiết sản phẩm</h2>
+	<p><strong>ID sản phẩm:</strong> @Model.Id</p>
+	<p><strong>Tên sản phẩm:</strong> @Model.Name</p>
+	<p><strong>Giá sản phẩm:</strong> @Model.Price</p>
+	<p><strong>Hình ảnh:</strong></p>
+	<img src="@Model.img" alt="@Model.Name" width="200" />
+</div>
