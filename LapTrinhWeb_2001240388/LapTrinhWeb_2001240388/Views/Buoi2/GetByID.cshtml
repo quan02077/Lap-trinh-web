@@ -1,14 +1,38 @@
 ﻿@using LapTrinhWeb_2001240388.Models.Buoi2
 @{
-	ViewBag.Title = "Chi tiết sản phẩm";
+    ViewBag.Title = "Chi tiết sản phẩm";
 }
-@model SanPham;
+@model SanPham
 
-<div>
-	<h2>Chi tiết sản phẩm</h2>
-	<p><strong>ID sản phẩm:</strong> @Model.Id</p>
-	<p><strong>Tên sản phẩm:</strong> @Model.Name</p>
-	<p><strong>Giá sản phẩm:</strong> @Model.Price</p>
-	<p><strong>Hình ảnh:</strong></p>
-	<img src="@Model.img" alt="@Model.Name" width="200" />
+<div class="row justify-content-center w-100">
+    <div class="col-md-8">
+        <div class="card shadow-lg border-0 rounded-3 p-3">
+            <div class="row g-0 align-items-center">
+
+                <div class="col-md-5 text-center p-3">
+                    <img src="@Model.img" alt="@Model.Name" class="img-fluid rounded shadow-sm border" style="max-height: 250px; object-fit: cover;" />
+                </div>
+
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <span class="badge bg-secondary mb-2">Mã sản phẩm: #@Model.Id</span>
+                        <h2 class="card-title fw-bold text-primary mb-3">@Model.Name</h2>
+                        
+                        <p class="mb-2 text-muted">Giá niêm yết:</p>
+                        <h3 class="text-danger fw-bold mb-4">@Model.Price $</h3>
+
+                        <div class="d-flex gap-2">
+                            <a asp-controller="Buoi2" asp-action="DisplayAll" class="btn btn-outline-secondary">
+                                ← Quay lại danh sách
+                            </a>
+                            <a href="#" class="btn btn-success">
+                                Chọn mua ngay
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
