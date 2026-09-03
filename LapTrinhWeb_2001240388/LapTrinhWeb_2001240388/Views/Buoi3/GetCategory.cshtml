@@ -1,0 +1,357 @@
+@using LapTrinhWeb_2001240388.Models;
+@model IEnumerable<Sach>
+@{
+    var currentCat = ViewBag.CurrentCategory as ChuDe;
+    var currentCatName = currentCat?.TenChuDe ?? "Chủ đề sách";
+    ViewBag.Title = $"Chủ đề: {currentCatName}";
+    Layout = "~/Views/Shared/_Layout_Ogani.cshtml";
+
+    var categories = ViewBag.Categories as IEnumerable<ChuDe>;
+    var saleOffBooks = ViewBag.SaleOffBooks as IEnumerable<Sach>;
+    var latestBooks = ViewBag.LatestBooks as IEnumerable<Sach>;
+}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/template/Ogani/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>@currentCatName</h2>
+                    <div class="breadcrumb__option">
+                        <a href="/">Home</a>
+                        <a href="@Url.Action("Index", "Buoi3")">Shop</a>
+                        <span>@currentCatName</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar Begin -->
+            <div class="col-lg-3 col-md-5">
+                <div class="sidebar">
+                    <div class="sidebar__item">
+                        <h4>Department</h4>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Index", "Buoi3")">Tất cả chủ đề</a>
+                            </li>
+                            @if (categories != null)
+                            {
+                                foreach (var cat in categories)
+                                {
+                                    var isActive = currentCat != null && currentCat.MaChuDe == cat.MaChuDe;
+                                    <li class="@(isActive ? "active" : "")">
+                                        <a href="@Url.Action("GetCategory", "Buoi3", new { id = cat.MaChuDe })"
+                                           style="@(isActive ? "font-weight: bold; color: #7fad39;" : "")">
+                                            @cat.TenChuDe
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="sidebar__item">
+                        <h4>Price</h4>
+                        <div class="price-range-wrap">
+                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                 data-min="10" data-max="540">
+                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                            </div>
+                            <div class="range-slider">
+                                <div class="price-input">
+                                    <input type="text" id="minamount">
+                                    <input type="text" id="maxamount">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar__item sidebar__item__color--option">
+                        <h4>Colors</h4>
+                        <div class="sidebar__item__color sidebar__item__color--white">
+                            <label for="white">
+                                White
+                                <input type="radio" id="white">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--gray">
+                            <label for="gray">
+                                Gray
+                                <input type="radio" id="gray">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--red">
+                            <label for="red">
+                                Red
+                                <input type="radio" id="red">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--black">
+                            <label for="black">
+                                Black
+                                <input type="radio" id="black">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--blue">
+                            <label for="blue">
+                                Blue
+                                <input type="radio" id="blue">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--green">
+                            <label for="green">
+                                Green
+                                <input type="radio" id="green">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="sidebar__item">
+                        <h4>Popular Size</h4>
+                        <div class="sidebar__item__size">
+                            <label for="large">
+                                Large
+                                <input type="radio" id="large">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="medium">
+                                Medium
+                                <input type="radio" id="medium">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="small">
+                                Small
+                                <input type="radio" id="small">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="tiny">
+                                Tiny
+                                <input type="radio" id="tiny">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="sidebar__item">
+                        <div class="latest-product__text">
+                            <h4>Latest Products</h4>
+                            <div class="latest-product__slider owl-carousel">
+                                @{
+                                    if (latestBooks != null && latestBooks.Any())
+                                    {
+                                        var slide1 = latestBooks.Take(3).ToList();
+                                        var slide2 = latestBooks.Skip(3).Take(3).ToList();
+
+                                        if (slide1.Any())
+                                        {
+                                            <div class="latest-prdouct__slider__item">
+                                                @foreach (var book in slide1)
+                                                {
+                                                    var bImg = !string.IsNullOrEmpty(book.AnhBia)
+                                                        ? (book.AnhBia.StartsWith("/") ? book.AnhBia : $"/template/Ogani/img/{book.AnhBia}")
+                                                        : "/template/Ogani/img/product/product-1.jpg";
+                                                    <a href="@Url.Action("Detail", "Buoi3", new { id = book.MaSach })" class="latest-product__item">
+                                                        <div class="latest-product__item__pic" style="width: 110px; height: 110px;">
+                                                            <img src="@bImg" alt="@book.TenSach" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
+                                                        </div>
+                                                        <div class="latest-product__item__text">
+                                                            <h6>@book.TenSach</h6>
+                                                            <span>@(book.GiaBan.HasValue ? book.GiaBan.Value.ToString("N0") + " VNĐ" : "Liên hệ")</span>
+                                                        </div>
+                                                    </a>
+                                                }
+                                            </div>
+                                        }
+                                        if (slide2.Any())
+                                        {
+                                            <div class="latest-prdouct__slider__item">
+                                                @foreach (var book in slide2)
+                                                {
+                                                    var bImg = !string.IsNullOrEmpty(book.AnhBia)
+                                                        ? (book.AnhBia.StartsWith("/") ? book.AnhBia : $"/template/Ogani/img/{book.AnhBia}")
+                                                        : "/template/Ogani/img/product/product-1.jpg";
+                                                    <a href="@Url.Action("Detail", "Buoi3", new { id = book.MaSach })" class="latest-product__item">
+                                                        <div class="latest-product__item__pic" style="width: 110px; height: 110px;">
+                                                            <img src="@bImg" alt="@book.TenSach" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
+                                                        </div>
+                                                        <div class="latest-product__item__text">
+                                                            <h6>@book.TenSach</h6>
+                                                            <span>@(book.GiaBan.HasValue ? book.GiaBan.Value.ToString("N0") + " VNĐ" : "Liên hệ")</span>
+                                                        </div>
+                                                    </a>
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="latest-prdouct__slider__item">
+                                            <a href="#" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="/template/Ogani/img/latest-product/lp-1.jpg" alt="">
+                                                </div>
+                                                <div class="latest-product__item__text">
+                                                    <h6>Crab Pool Security</h6>
+                                                    <span>$30.00</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="/template/Ogani/img/latest-product/lp-2.jpg" alt="">
+                                                </div>
+                                                <div class="latest-product__item__text">
+                                                    <h6>Crab Pool Security</h6>
+                                                    <span>$30.00</span>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="/template/Ogani/img/latest-product/lp-3.jpg" alt="">
+                                                </div>
+                                                <div class="latest-product__item__text">
+                                                    <h6>Crab Pool Security</h6>
+                                                    <span>$30.00</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar End -->
+
+            <!-- Main Content Begin -->
+            <div class="col-lg-9 col-md-7">
+                <!-- Sale Off Section Begin -->
+                <div class="product__discount">
+                    <div class="section-title product__discount__title">
+                        <h2>Sale Off</h2>
+                    </div>
+                    <div class="row">
+                        <div class="product__discount__slider owl-carousel">
+                            @{
+                                if (saleOffBooks != null && saleOffBooks.Any())
+                                {
+                                    foreach (var sBook in saleOffBooks)
+                                    {
+                                        var sImg = !string.IsNullOrEmpty(sBook.AnhBia)
+                                            ? (sBook.AnhBia.StartsWith("/") ? sBook.AnhBia : $"/template/Ogani/img/{sBook.AnhBia}")
+                                            : "/template/Ogani/img/product/product-1.jpg";
+                                        var originPrice = sBook.GiaBan ?? 50000;
+                                        var discountedPrice = originPrice * 0.8m;
+
+                                        <div class="col-lg-4">
+                                            <div class="product__discount__item">
+                                                <div class="product__discount__item__pic set-bg" data-setbg="@sImg" style="background-size: contain; background-color: #f5f5f5;">
+                                                    <div class="product__discount__percent">-20%</div>
+                                                    <ul class="product__item__pic__hover">
+                                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="product__discount__item__text">
+                                                    <span>@(sBook.MaChuDeNavigation?.TenChuDe ?? "Sách")</span>
+                                                    <h5><a href="@Url.Action("Detail", "Buoi3", new { id = sBook.MaSach })">@sBook.TenSach</a></h5>
+                                                    <div class="product__item__price">@discountedPrice.ToString("N0") VNĐ <span>@originPrice.ToString("N0") VNĐ</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- Sale Off Section End -->
+
+                <!-- Filter Item Begin -->
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+                                <span>Sort By</span>
+                                <select>
+                                    <option value="0">Default</option>
+                                    <option value="1">Price: Low to High</option>
+                                    <option value="2">Price: High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__found">
+                                <h6><span>@(Model?.Count() ?? 0)</span> Products found</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            <div class="filter__option">
+                                <span class="icon_grid-2x2"></span>
+                                <span class="icon_ul"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Filter Item End -->
+
+                <!-- Product Grid Begin -->
+                <div class="row">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            var imgUrl = !string.IsNullOrEmpty(item.AnhBia)
+                                ? (item.AnhBia.StartsWith("/") ? item.AnhBia : $"/template/Ogani/img/{item.AnhBia}")
+                                : "/template/Ogani/img/product/product-1.jpg";
+
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@imgUrl" style="background-size: contain; background-color: #f5f5f5;">
+                                        <ul class="product__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="@Url.Action("Detail", "Buoi3", new { id = item.MaSach })">@item.TenSach</a></h6>
+                                        <h5>@(item.GiaBan.HasValue ? item.GiaBan.Value.ToString("N0") + " VNĐ" : "Liên hệ")</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12 text-center py-5">
+                            <p class="text-muted">Chưa có sản phẩm nào thuộc chủ đề "@currentCatName".</p>
+                        </div>
+                    }
+                </div>
+                <!-- Product Grid End -->
+
+                <!-- Pagination Begin -->
+                <div class="product__pagination">
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                </div>
+                <!-- Pagination End -->
+            </div>
+            <!-- Main Content End -->
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->

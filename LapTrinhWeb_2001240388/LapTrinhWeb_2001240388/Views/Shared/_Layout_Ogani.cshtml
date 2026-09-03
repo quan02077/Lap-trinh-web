@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@(ViewBag.Title != null ? $"{ViewBag.Title} - Ogani | Template" : "Ogani | Template")</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/template/Ogani/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/template/Ogani/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/template/Ogani/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/template/Ogani/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/template/Ogani/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/template/Ogani/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/template/Ogani/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/template/Ogani/css/style.css" type="text/css">
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+    <partial name="~/Views/Shared/Ogani/_header.cshtml" />
+
+    @RenderBody()
+
+    <partial name="~/Views/Shared/Ogani/_footer.cshtml" />
+
+    <!-- Js Plugins -->
+    <script src="~/template/Ogani/js/jquery-3.3.1.min.js"></script>
+    <script src="~/template/Ogani/js/bootstrap.min.js"></script>
+    <script src="~/template/Ogani/js/jquery.nice-select.min.js"></script>
+    <script src="~/template/Ogani/js/jquery-ui.min.js"></script>
+    <script src="~/template/Ogani/js/jquery.slicknav.js"></script>
+    <script src="~/template/Ogani/js/mixitup.min.js"></script>
+    <script src="~/template/Ogani/js/owl.carousel.min.js"></script>
+    <script src="~/template/Ogani/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

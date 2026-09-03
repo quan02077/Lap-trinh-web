@@ -1,0 +1,214 @@
+@using LapTrinhWeb_2001240388.Models;
+@model Sach
+@{
+    ViewBag.Title = Model?.TenSach ?? "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout_Ogani.cshtml";
+
+    var relatedBooks = ViewBag.RelatedBooks as IEnumerable<Sach>;
+
+    var productTitle = Model?.TenSach ?? "Tên sản phẩm";
+    var categoryName = Model?.MaChuDeNavigation?.TenChuDe ?? "Chủ đề";
+    var publisherName = Model?.MaNxbNavigation?.TenNxb ?? "N/A";
+    var priceFormatted = Model?.GiaBan.HasValue == true
+        ? Model.GiaBan.Value.ToString("N0") + " VNĐ"
+        : "Liên hệ";
+    var description = !string.IsNullOrWhiteSpace(Model?.MoTa)
+        ? Model.MoTa
+        : "Chưa có mô tả chi tiết cho sản phẩm này.";
+
+    var largeImgUrl = "/template/Ogani/img/product/details/product-details-1.jpg";
+    if (Model != null && !string.IsNullOrEmpty(Model.AnhBia))
+    {
+        largeImgUrl = Model.AnhBia.StartsWith("/")
+            ? Model.AnhBia
+            : $"/template/Ogani/img/{Model.AnhBia}";
+    }
+
+    var availability = Model != null
+        ? (Model.SoLuongTon > 0 ? $"Còn hàng ({Model.SoLuongTon} cuốn)" : "Hết hàng")
+        : "Còn hàng";
+}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/template/Ogani/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>@productTitle</h2>
+                    <div class="breadcrumb__option">
+                        <a href="/">Home</a>
+                        @if (Model?.MaChuDe != null)
+                        {
+                            <a href="@Url.Action("GetCategory", "Buoi3", new { id = Model.MaChuDe })">@categoryName</a>
+                        }
+                        <span>@productTitle</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item text-center" style="background-color: #f8f9fa; padding: 25px; border-radius: 8px;">
+                        <img class="product__details__pic__item--large"
+                             src="@largeImgUrl" alt="@productTitle" style="max-height: 450px; width: auto; object-fit: contain;">
+                    </div>
+                    <div class="product__details__pic__slider owl-carousel">
+                        <img data-imgbigurl="@largeImgUrl"
+                             src="@largeImgUrl" alt="" style="height: 100px; object-fit: contain; background: #fff;">
+                        <img data-imgbigurl="/template/Ogani/img/product/details/product-details-2.jpg"
+                             src="/template/Ogani/img/product/details/thumb-1.jpg" alt="" style="height: 100px; object-fit: cover;">
+                        <img data-imgbigurl="/template/Ogani/img/product/details/product-details-3.jpg"
+                             src="/template/Ogani/img/product/details/thumb-2.jpg" alt="" style="height: 100px; object-fit: cover;">
+                        <img data-imgbigurl="/template/Ogani/img/product/details/product-details-5.jpg"
+                             src="/template/Ogani/img/product/details/thumb-3.jpg" alt="" style="height: 100px; object-fit: cover;">
+                        <img data-imgbigurl="/template/Ogani/img/product/details/product-details-4.jpg"
+                             src="/template/Ogani/img/product/details/thumb-4.jpg" alt="" style="height: 100px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>@productTitle</h3>
+                    <div class="product__details__rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <span>(18 đánh giá)</span>
+                    </div>
+                    <div class="product__details__price">@priceFormatted</div>
+                    <p>@description</p>
+                    <div class="product__details__quantity">
+                        <div class="quantity">
+                            <div class="pro-qty">
+                                <input type="text" value="1">
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="primary-btn">THÊM VÀO GIỎ HÀNG</a>
+                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    <ul>
+                        <li><b>Tình trạng</b> <span>@availability</span></li>
+                        <li><b>Giao hàng</b> <span>Giao trong ngày. <samp>Miễn phí nhận tại cửa hàng</samp></span></li>
+                        <li><b>Chủ đề</b> <span><a href="@Url.Action("GetCategory", "Buoi3", new { id = Model?.MaChuDe })" style="color: #7fad39; font-weight: 600;">@categoryName</a></span></li>
+                        <li><b>Nhà xuất bản</b> <span>@publisherName</span></li>
+                        <li>
+                            <b>Chia sẻ</b>
+                            <div class="share">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                               aria-selected="true">Mô tả sản phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                               aria-selected="false">Thông tin chi tiết</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                               aria-selected="false">Đánh giá <span>(1)</span></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Mô tả sản phẩm</h6>
+                                <p>@description</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Thông tin xuất bản & quản lý</h6>
+                                @if (Model != null)
+                                {
+                                    <p><strong>Mã sách:</strong> @Model.MaSach</p>
+                                    <p><strong>Tên sách:</strong> @Model.TenSach</p>
+                                    <p><strong>Chủ đề:</strong> @categoryName</p>
+                                    <p><strong>Nhà xuất bản:</strong> @publisherName</p>
+                                    <p><strong>Ngày cập nhật:</strong> @(Model.NgayCapNhat?.ToString("dd/MM/yyyy") ?? "N/A")</p>
+                                    <p><strong>Số lượng tồn:</strong> @(Model.SoLuongTon?.ToString() ?? "0") cuốn</p>
+                                    <p><strong>Giá bán:</strong> @priceFormatted</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Đánh giá từ độc giả</h6>
+                                <p>Sách hay, bìa đẹp, nội dung bổ ích. Đóng gói cẩn thận, giao hàng nhanh chóng!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Details Section End -->
+
+<!-- Related Product Section Begin -->
+<section class="related-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related__product__title">
+                    <h2>Sản phẩm liên quan</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @if (relatedBooks != null && relatedBooks.Any())
+            {
+                foreach (var item in relatedBooks)
+                {
+                    var bookImg = !string.IsNullOrEmpty(item.AnhBia)
+                        ? (item.AnhBia.StartsWith("/") ? item.AnhBia : $"/template/Ogani/img/{item.AnhBia}")
+                        : "/template/Ogani/img/product/product-1.jpg";
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="@bookImg" style="background-size: contain; background-color: #f5f5f5;">
+                                <ul class="product__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><a href="@Url.Action("Detail", "Buoi3", new { id = item.MaSach })">@item.TenSach</a></h6>
+                                <h5>@(item.GiaBan.HasValue ? item.GiaBan.Value.ToString("N0") + " VNĐ" : "Liên hệ")</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center py-3">
+                    <p class="text-muted">Không có sản phẩm liên quan nào.</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Related Product Section End -->
