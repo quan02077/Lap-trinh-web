@@ -1,0 +1,17 @@
+﻿@using LapTrinhWeb_2001240388.Models.Buoi3_4
+@{
+	ViewBag.Title = "Hiển thị tất cả chủ đề";
+}
+@model IEnumerable<ChuDe>
+<ul>
+		@foreach (var item in Model)
+		{
+			<li>
+				@item.MaChuDe - @item.TenChuDe 
+				<a asp-action="Edit" asp-route-id="@item.MaChuDe">Sửa</a>
+				<a asp-action="Delete" asp-route-id="@item.MaChuDe">Xóa</a>
+			</li>
+		}
+</ul>
+
+<button onclick="location.href='/Buoi3_4/Add'">Thêm chủ đề</button>

@@ -1,0 +1,21 @@
+﻿@using LapTrinhWeb_2001240388.Models.Buoi3_4;
+@{
+	ViewBag.Title = "Sửa chủ đề";
+}
+@model ChuDe
+
+<form asp-action="Edit" method="post">
+    <div style="margin-bottom: 15px;">
+        <label>Mã Chủ Đề:</label><br />
+        <input type="text" asp-for="MaChuDe" readonly />
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label>Tên Chủ Đề:</label><br />
+        <input type="text" asp-for="TenChuDe" required />
+    </div>
+
+    <button type="submit" style="padding: 5px 15px; cursor: pointer;">Cập nhật</button>
+</form>
+
+<br />
+<a href="/Buoi3_4/Index">Quay lại danh sách</a>

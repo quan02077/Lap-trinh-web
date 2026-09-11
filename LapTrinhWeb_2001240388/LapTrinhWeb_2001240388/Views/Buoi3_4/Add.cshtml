@@ -1,0 +1,14 @@
+﻿@model LapTrinhWeb_2001240388.Models.Buoi3_4.ChuDe
+@{
+	ViewBag.Title = "Thêm chủ đề";
+}
+
+<form asp-action="Add" method="post">
+	<label name='MaChuDe'>Mã chủ đề</label><br />
+	<label style="background-color: lightgray; border-radius: 5px;">Mã tự động tăng</label><br />
+	<label name='TenChuDe'>Tên chủ đề</label><br />
+	<input type="text" name="TenChuDe" asp-for="TenChuDe" required /><br />
+	<button type="submit">Thêm</button>
+</form>
+<br />
+<a href="/Buoi3_4/Index">Quay lại danh sách</a>
