@@ -1,4 +1,4 @@
-﻿namespace LapTrinhWeb_2001240388.Models.Buoi3_4
+﻿namespace LapTrinhWeb_2001240388.Models.Buoi3_4_5
 {
     public class ChuDe
     {

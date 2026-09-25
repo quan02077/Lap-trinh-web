@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4" style="max-width: 700px;">
+    <form method="post" asp-controller="Book" asp-action="Contact">
+
+        <div class="form-group mb-4 text-center">
+            <label for="email" class="mb-2 text-muted">Email</label>
+            <input type="email" class="form-control text-center" id="email" name="email" style="background-color: #e6f0fa;" placeholder="Admin@Example.Com" required />
+        </div>
+
+        <div class="form-group mb-4 text-center">
+            <label for="thongTin" class="mb-2 text-muted">Thông tin liên hệ:</label>
+            <textarea class="form-control" id="thongTin" name="thongTin" rows="4" placeholder="Bài Kiểm Tra Giữa Kỳ" required></textarea>
+        </div>
+
+        <div class="text-center mb-5">
+            <button type="submit" class="btn btn-outline-secondary px-4">Submit</button>
+        </div>
+    </form>
+    @if (ViewBag.Email != null || ViewBag.ThongTin != null)
+    {
+        <div class="text-center mt-4">
+            <h6 class="font-weight-bold mb-3">Kết Quả Bạn Đã Nhập:</h6>
+            <p class="mb-1"><strong style="color: #555;">Email:</strong> @ViewBag.Email</p>
+            <p><strong style="color: #555;">Thông tin:</strong> @ViewBag.ThongTin</p>
+
+            @if (ViewBag.TrangThaiGui != null)
+            {
+                <div class="alert alert-info mt-3 border-0" style="background-color: #e6f0fa; color: #333;">
+                    @ViewBag.TrangThaiGui
+                </div>
+            }
+        </div>
+    }
+</div>

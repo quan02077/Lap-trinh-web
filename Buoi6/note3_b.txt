@@ -1,0 +1,61 @@
+
+1. Views/Home/index.cshtml goi:
+	  @await Component.InvokeAsync("CategoryMenu")
+2. Load view tu: shared/CategoryMenu/default.cshtml -> tu dong load ViewComponents/CategoryMenuViewComponent.cs?
+-> ViewComponents phai co CategoryMenuViewComponent.cs?
+
+-----------------------
+Gọi ở View: @await Component.InvokeAsync("CategoryMenu") -> trong view
+Hệ thống tìm class C#: CategoryMenuViewComponent.cs (hoặc class có [ViewComponent(Name = "CategoryMenu")]) trong thư mục ViewComponents.
+
+Hàm InvokeAsync() chạy xong sẽ tự động tìm file giao diện HTML tại đường dẫn chuẩn: Views/Shared/Components/CategoryMenu/Default.cshtml để render ra màn hình.
+===================================
+
+PartialView (Header/footer)/Product
+Partial View đơn giản chỉ là một đoạn mã HTML/Razor tái sử dụng (giống như một hàm render giao diện nhỏ).
+cách hoạt động, nơi lưu trữ và sự khác biệt của @await Html.PartialAsync(...):
+
+1. Partial View lấy dữ liệu từ đâu?
+Partial View không tự đi lấy dữ liệu (không có class C# đằng sau để gọi database). Dữ liệu của nó hoàn toàn được truyền trực tiếp từ trang cha (parent view).
+2. Vi tri: path của Partial View linh hoạt hơn View Component. Hệ thống sẽ tìm theo thứ tự ưu tiên sau:
+	- Thư mục cùng cấp với Controller hiện tại:Views\TênController_ProductItemPartial.cshtml
+	- Thư mục dùng chung (Shared):Views\Shared\_ProductItemPartial.cshtml
+
+=================================
+Section
+
+rong ASP.NET Core Razor, @section là một tính năng dùng để truyền một đoạn nội dung từ trang con (View) ngược lên trang khung chung (Layout).
+- dua mã JavaScript, CSS riêng của từng trang vào đúng vị trí (<head> hoặc cuối thẻ <body> _Layout.cshtml.)
+1. Cách hoạt động gồm 2 phần
+	Phần 1: Nơi đón nhận và hiển thị (_Layout.cshtml)
+	Dùng lệnh @RenderSection để đánh dấu vị trí mà các trang con sẽ đổ nội dung vào:
+
+HTML
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website của tôi</title>
+     @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <div class="container">
+        @RenderBody() 
+    </div>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+2. Phan dinh nghia noi dung (Trong View:).
+
+@section Scripts {
+    <script>
+        console.log("Đoạn script này chỉ chạy riêng cho trang Index!");
+        // Viết code JS tại đây...
+    </script>
+}
+
+@section Styles{
+    <style>
+	.class1{}
+    </style>
+}

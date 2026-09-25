@@ -1,0 +1,33 @@
+@model shopweb3.Models.Product
+
+@{
+    ViewData["Title"] = "Xóa Sản phẩm";
+}
+
+<h3 class="text-danger">Bạn có chắc muốn xóa sản phẩm này?</h3>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Hình ảnh</dt>
+        <dd class="col-sm-9">
+            <img src="@(string.IsNullOrEmpty(Model.Img) ? "/images/default.jpg" : "/images/" + Model.Img)" 
+                 style="width: 100px; height: 100px; object-fit: cover;" class="img-thumbnail" />
+        </dd>
+
+        <dt class="col-sm-3">Tên sản phẩm</dt>
+        <dd class="col-sm-9">@Model.ProName</dd>
+
+        <dt class="col-sm-3">Danh mục</dt>
+        <dd class="col-sm-9">@(Model.CatName ?? "N/A")</dd>
+
+        <dt class="col-sm-3">Giá bán</dt>
+        <dd class="col-sm-9">@Model.Price.ToString("N0") VNĐ</dd>
+    </dl>
+    
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="ProId" />
+        <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>

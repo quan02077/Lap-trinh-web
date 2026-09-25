@@ -1,8 +1,10 @@
 using LapTrinhWeb_2001240388.Models;
+using LapTrinhWeb_2001240388.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddSingleton<EmailService>();
+
 builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

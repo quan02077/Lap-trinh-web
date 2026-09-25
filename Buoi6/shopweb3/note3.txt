@@ -1,0 +1,88 @@
+1. Tao project version net8 
+dotnet new mvc -n shopweb3 -f net8.0
+	-n: name 
+	-f: framework
+dotnet new mvc -n shopweb3
+
+2. Tao folder:
+MyStoreApp/
+├── Areas/
+│   └── Admin/
+│       ├── Controllers/
+│       │   ├── CategoryController.cs
+│       │   └── ProductController.cs
+│       └── Views/
+│           ├── Category/
+│           │   ├── Index.cshtml
+│           │   ├── Create.cshtml
+│           │   ├── Edit.cshtml
+│           │   └── Delete.cshtml
+│           ├── Product/
+│           │   ├── Index.cshtml
+│           │   ├── Create.cshtml
+│           │   ├── Edit.cshtml
+│           │   └── Delete.cshtml
+│           ├── Shared/
+│           │   └── _AdminLayout.cshtml
+│           └── _ViewImports.cshtml
+├── Controllers/
+│   └── HomeController.cs
+├── Data/
+│   └── ApplicationDbContext.cs
+├── Models/
+│   ├── Category.cs
+│   └── Product.cs
+├── Repositories/
+│   ├── ICategoryRepository.cs
+│   ├── CategoryRepository.cs
+│   ├── IProductRepository.cs
+│   └── ProductRepository.cs
+├── ViewComponents/
+│   └── CategoryMenuViewComponent.cs
+├── ViewModels/
+│   ├── ProductViewModel.cs
+│   └── CategoryMenuViewModel.cs
+├── Views/
+│   ├── Home/
+│   │   ├── Index.cshtml
+│   │   └── Contact.cshtml
+│   ├── Shared/
+│   │   ├── Components/
+│   │   │   └── CategoryMenu/
+│   │   │       └── Default.cshtml
+│   │   ├── _Layout.cshtml
+│   │   └── _ProductItemPartial.cshtml
+│   └── _ViewImports.cshtml
+├── wwwroot/
+│   └── images/
+├── appsettings.json
+└── Program.cs
+
+3. Cai dat thu vien sql
+dotnet add package Microsoft.Data.SqlClient  => ban ổn định mới nhất
+
+//  Các version sqlClient>5 đều tương thích với .net 8,9,10,...
+dotnet add package Microsoft.Data.SqlClient -v 5.2.2 	=> bản ổn định cụ thể
+dotnet add package Microsoft.Data.SqlClient -v 7		=> cài nhánh mới nhất của 7. 
+
+Xem kết quả cài trong file .csproj
+<ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7" />
+</ItemGroup>
+  
+Nếu có sẵn file .csproj chứa các thư viện cần thiết => Cài đặt
+dotnet restore 
+
+4. Cách đặt tên view - ViewComponents/
+ -  Cơ chế tìm kiếm View (View Engine Discovery) của ASP.NET Core
+	@await Component.InvokeAsync("CategoryMenu")
+	ASP.NET Core View Engine sẽ tự động đi tìm file View theo các đường dẫn mặc định theo đúng thứ tự sau:
+	. Views/{Controller}/Components/{ViewComponentName}/{ViewName}.cshtml
+	. Views/Shared/Components/{ViewComponentName}/{ViewName}.cshtml
+	. Pages/Shared/Components/{ViewComponentName}/{ViewName}.cshtml (Dành cho Razor Pages)
+	. Nếu  không truyền tham số chỉ định tên View trong file CategoryMenuViewComponent.cs:
+		return View(); // Không truyền tên view vào đây
+		Thì mặc định tham số {ViewName} sẽ nhận giá trị là "Default". 
+ - Nếu không sử dụng mặc định, return View("MenuSidebar", categories); => MenuSidebar: Tên view MenuSidebar
+ 
+5. 

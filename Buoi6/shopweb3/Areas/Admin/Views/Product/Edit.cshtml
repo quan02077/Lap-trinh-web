@@ -1,0 +1,59 @@
+@model shopweb3.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Sửa Sản phẩm";
+}
+
+<h2>Chỉnh sửa Sản phẩm</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <input type="hidden" asp-for="ProId" />
+            <input type="hidden" asp-for="ExistingImg" />
+
+            <div class="mb-3">
+                <label asp-for="ProName" class="form-label">Tên sản phẩm</label>
+                <input asp-for="ProName" class="form-control" />
+                <span asp-validation-for="ProName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CatId" class="form-label">Danh mục</label>
+                <select asp-for="CatId" class="form-select" asp-items="ViewBag.CatId">
+                    <option value="">-- Chọn danh mục --</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Price" class="form-label">Giá (VNĐ)</label>
+                    <input asp-for="Price" type="number" step="1000" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Discount" class="form-label">Giảm giá (%)</label>
+                    <input asp-for="Discount" type="number" step="0.1" class="form-control" />
+                    <span asp-validation-for="Discount" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label d-block">Ảnh hiện tại:</label>
+                <img src="@(string.IsNullOrEmpty(Model.ExistingImg) ? "/images/default.jpg" : "/images/" + Model.ExistingImg)" 
+                     style="width: 100px; height: 100px; object-fit: cover;" class="img-thumbnail mb-2" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ImageFile" class="form-label">Tải lên ảnh mới (Bỏ qua nếu không đổi)</label>
+                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+            </div>
+
+            <button type="submit" class="btn btn-warning">Cập nhật</button>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </form>
+    </div>
+</div>

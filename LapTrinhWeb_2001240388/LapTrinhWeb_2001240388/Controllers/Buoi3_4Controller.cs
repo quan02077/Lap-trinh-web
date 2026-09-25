@@ -1,4 +1,4 @@
-﻿using LapTrinhWeb_2001240388.Models.Buoi3_4;
+﻿using LapTrinhWeb_2001240388.Models.Buoi3_4_5;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;

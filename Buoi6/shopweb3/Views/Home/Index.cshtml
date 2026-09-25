@@ -1,0 +1,21 @@
+﻿@model IEnumerable<shopweb3.Models.Product>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoryMenu")
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    @await Html.PartialAsync("_ProductItemPartial", product)
+                </div>
+            }
+        </div>
+    </div>
+</div>

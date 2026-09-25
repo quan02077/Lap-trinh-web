@@ -1,0 +1,18 @@
+﻿@model IEnumerable<LapTrinhWeb_2001240388.Models.Buoi3_4_5.ChuDe>
+
+<div class="list-group shadow-sm">
+    <div class="list-group-item text-white text-center font-weight-bold"
+         style="background-color: #6cbe45; border-color: #6cbe45; font-size: 16px;">
+        Chủ Đề Sách
+    </div>
+
+    @if (Model != null)
+    {
+        foreach (var chuDe in Model)
+        {
+            <a href="#" class="list-group-item list-group-item-action text-center text-dark" style="font-size: 14px;">
+                @chuDe.TenChuDe
+            </a>
+        }
+    }
+</div>

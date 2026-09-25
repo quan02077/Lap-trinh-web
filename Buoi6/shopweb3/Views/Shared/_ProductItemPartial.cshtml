@@ -1,0 +1,16 @@
+@model shopweb3.Models.Product
+
+<div class="card h-100 shadow-sm">
+    <img src="@(string.IsNullOrEmpty(Model.Img) ? "/images/default.jpg" : "/images/" + Model.Img)" class="card-img-top" alt="@Model.ProName" style="height: 200px; object-fit: cover;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.ProName</h5>
+        <p class="card-text text-muted mb-1"><small>Danh mục: @Model.CatName</small></p>
+        <p class="card-text text-danger font-weight-bold">
+            @Model.Price.ToString("N0") VNĐ
+            @if (Model.Discount > 0)
+            {
+                <span class="badge bg-warning text-dark">-@Model.Discount%</span>
+            }
+        </p>
+    </div>
+</div>
