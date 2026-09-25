@@ -1,4 +1,4 @@
-﻿using LapTrinhWeb_2001240388.Models.Buoi6;
+using LapTrinhWeb_2001240388.Models.Buoi6;
 using Microsoft.Data.SqlClient;
 
 namespace LapTrinhWeb_2001240388.Repositories
@@ -73,11 +73,11 @@ namespace LapTrinhWeb_2001240388.Repositories
                                 ProId = Convert.ToInt32(reader["ProId"]),
                                 ProName = reader["ProName"].ToString(),
                                 Price = Convert.ToDecimal(reader["Price"]),
-                                Discount = Convert.ToDecimal(reader["Discount"]),
-                                CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
-                                Img = reader["Img"].ToString(),
-                                CatId = Convert.ToInt32(reader["CatId"]),
-                                CatName = reader["CatName"].ToString()
+                                Discount = reader["Discount"] == DBNull.Value ? (decimal?)null : Convert.ToDecimal(reader["Discount"]),
+                                CreatedAt = reader["CreatedAt"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["CreatedAt"]),
+                                Img = reader["Img"] == DBNull.Value ? null : reader["Img"].ToString(),
+                                CatId = reader["CatId"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["CatId"]),
+                                CatName = reader["CatName"] == DBNull.Value ? null : reader["CatName"].ToString()
                             });
                         }
                     }
@@ -105,11 +105,11 @@ namespace LapTrinhWeb_2001240388.Repositories
                                 ProId = Convert.ToInt32(reader["ProId"]),
                                 ProName = reader["ProName"].ToString(),
                                 Price = Convert.ToDecimal(reader["Price"]),
-                                Discount = Convert.ToDecimal(reader["Discount"]),
-                                CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
-                                Img = reader["Img"].ToString(),
-                                CatId = Convert.ToInt32(reader["CatId"]),
-                                CatName = reader["CatName"].ToString()
+                                Discount = reader["Discount"] == DBNull.Value ? (decimal?)null : Convert.ToDecimal(reader["Discount"]),
+                                CreatedAt = reader["CreatedAt"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["CreatedAt"]),
+                                Img = reader["Img"] == DBNull.Value ? null : reader["Img"].ToString(),
+                                CatId = reader["CatId"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["CatId"]),
+                                CatName = reader["CatName"] == DBNull.Value ? null : reader["CatName"].ToString()
                             };
                         }
                     }
