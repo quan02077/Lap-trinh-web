@@ -1,0 +1,45 @@
+﻿@model IEnumerable<LapTrinhWeb_2001240388.Models.Buoi6.Product>
+
+@{
+    ViewData["Title"] = "Quản lý Sản phẩm";
+	Layout = "_layout_b6";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Danh sách Sản phẩm</h2>
+    <a asp-action="Create" class="btn btn-primary">Thêm sản phẩm mới</a>
+</div>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Hình ảnh</th>
+            <th>Tên sản phẩm</th>
+            <th>Danh mục</th>
+            <th>Giá bán</th>
+            <th>Giảm giá (%)</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProId</td>
+                <td>
+                    <img src="@(string.IsNullOrEmpty(item.Img) ? "/images/default.jpg" : "/images/" + item.Img)"
+                         alt="@item.ProName" style="width: 60px; height: 60px; object-fit: cover;" class="img-thumbnail" />
+                </td>
+                <td>@item.ProName</td>
+                <td>@(item.CatName ?? "N/A")</td>
+                <td>@item.Price.ToString("N0") VNĐ</td>
+                <td>@item.Discount%</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProId" class="btn btn-sm btn-warning">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.ProId" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
