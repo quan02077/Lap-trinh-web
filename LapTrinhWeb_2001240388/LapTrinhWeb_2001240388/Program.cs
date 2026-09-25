@@ -1,4 +1,5 @@
 using LapTrinhWeb_2001240388.Models;
+using LapTrinhWeb_2001240388.Repositories;
 using LapTrinhWeb_2001240388.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,11 @@ builder.Services.AddSingleton<EmailService>();
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+builder.Services.AddScoped<IProductRepo, ProductRepo>();
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString2 = builder.Configuration.GetConnectionString("conn2");
 
 var app = builder.Build();
 

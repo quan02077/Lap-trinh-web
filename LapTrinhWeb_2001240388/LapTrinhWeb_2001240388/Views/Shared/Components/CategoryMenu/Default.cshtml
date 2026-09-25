@@ -1,0 +1,11 @@
+﻿@model IEnumerable<LapTrinhWeb_2001240388.Models.Buoi6.Category>
+
+<div class="list-group">
+    <a href="/" class="list-group-item list-group-item-action active">Tất cả danh mục</a>
+    @foreach (var item in Model)
+    {
+        <a href="/Home/Index?catId=@item.CatId" class="list-group-item list-group-item-action">
+            @item.CatName
+        </a>
+    }
+</div>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<LapTrinhWeb_2001240388.Models.Buoi6.Category>
+@{
+    Layout = "_layout_b6";
+    ViewData["Title"] = "Thêm Danh mục";
+}
+
+<h2>Thêm mới Danh mục</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="CatName" class="form-label">Tên danh mục</label>
+                <input asp-for="CatName" class="form-control" />
+                <span asp-validation-for="CatName" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">Lưu lại</button>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </form>
+    </div>
+</div>
